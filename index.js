@@ -13,8 +13,10 @@ app.get('/hi', (req, res) => {
   res.send('Hello World');
 });
 
-app.get('/payment-success', (req, res) => {
-  const { pp_ResponseCode, pp_TxnRefNo } = req.query;
+app.all('/payment-success', (req, res) => {
+  const data = req.method === 'POST' ? req.body : req.query;
+
+  const { pp_ResponseCode, pp_TxnRefNo } = data;
 
   if (pp_ResponseCode === '000') {
     res.send(`✅ Payment Successful! Transaction Ref: ${pp_TxnRefNo}`);
