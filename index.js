@@ -1,8 +1,17 @@
 const express = require('express');
-const dotenv = require('dotenv')
+const serverless = require('serverless-http');
+const dotenv = require('dotenv');
 dotenv.config();
+
 const app = express();
-const PORT = process.env.PORT || 5000;
+
+app.get('/', (req, res) => {
+  res.send('Hello');
+});
+
+app.get('/hi', (req, res) => {
+  res.send('Hello World');
+});
 
 app.get('/payment-success', (req, res) => {
   const { pp_ResponseCode, pp_TxnRefNo } = req.query;
@@ -14,13 +23,7 @@ app.get('/payment-success', (req, res) => {
   }
 });
 
-app.get("/",(req,res)=>{
-  res.send("Hello")
-});
+// ❌ DO NOT USE app.listen(...) on Vercel!
 
-app.get("/hi",(req,res)=>{
-  res.send("Hello World")
-});
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+module.exports = app;
+module.exports.handler = serverless(app); // ✅ This is what Vercel calls
