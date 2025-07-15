@@ -17,6 +17,10 @@ app.get('/payment-success', (req, res) => {
 app.get("/",(req,res)=>{
   res.send("Hello")
 });
+
+app.get("/hi",(req,res)=>{
+  res.send("Hello World")
+});
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
