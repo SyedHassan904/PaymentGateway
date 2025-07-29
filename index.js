@@ -20,13 +20,13 @@ app.all('/payment-success', (req, res) => {
   const { pp_ResponseCode, pp_TxnRefNo } = data;
 
   if (pp_ResponseCode === '000') {
-    res.send(`✅ Payment Successful! Transaction Ref: ${pp_TxnRefNo}`);
+    res.send(`Payment Successful! Transaction Ref: ${pp_TxnRefNo}`);
   } else {
-    res.send(`❌ Payment Failed. Code: ${pp_ResponseCode}`);
+    res.send(` Payment Failed. Code: ${pp_ResponseCode}`);
   }
 });
 
-// ❌ DO NOT USE app.listen(...) on Vercel!
+
 
 module.exports = app;
-module.exports.handler = serverless(app); // ✅ This is what Vercel calls
+module.exports.handler = serverless(app); //  This is what Vercel calls
