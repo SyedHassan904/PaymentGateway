@@ -30,5 +30,4 @@ app.all('/payment-success', (req, res) => {
 app.listen(3000,()=>{
   console.log("Server running")
 })
-// module.exports = app;
-// module.exports.handler = serverless(app); //  This is what Vercel calls
+
